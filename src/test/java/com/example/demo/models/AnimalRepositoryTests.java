@@ -26,10 +26,10 @@ public class AnimalRepositoryTests {
             System.out.println(animal);
         }
 
-        Assert.assertThat(animals.findAnimalByUID(1).getName(), is("kotek"));
-        Assert.assertThat(animals.findAnimalByUID(1).getSpecies(), is("kot"));
-        Assert.assertThat(animals.findAnimalByUID(1).getUID(), equalTo(1));
-        Assert.assertThat(animals.findAnimalByUID(1), notNullValue());
+        Assert.assertThat(animals.getAnimalByUID(1).getName(), is("kotek"));
+        Assert.assertThat(animals.getAnimalByUID(1).getSpecies(), is("kot"));
+        Assert.assertThat(animals.getAnimalByUID(1).getUID(), equalTo(1));
+        Assert.assertThat(animals.getAnimalByUID(1), notNullValue());
     }
 
     @Test
@@ -38,13 +38,13 @@ public class AnimalRepositoryTests {
         boolean AnimalNotFoundExceptionThrown2 = false;
 
         try {
-            animals.findAnimalByUID(234);
+            animals.getAnimalByUID(234);
         } catch (AnimalNotFoundException e) {
             AnimalNotFoundExceptionThrown1 = true;
         }
 
         try {
-            animals.findAnimalByUID(-23);
+            animals.getAnimalByUID(-23);
         } catch (AnimalNotFoundException e) {
             AnimalNotFoundExceptionThrown2 = true;
         }
@@ -58,10 +58,10 @@ public class AnimalRepositoryTests {
     public void AnimalRemoveTest() {
         int UID = 1;
         Animal animalBefore=null, animalAfter=null;
-        animalBefore = animals.findAnimalByUID(UID);
+        animalBefore = animals.getAnimalByUID(UID);
         animals.removeAnimalByUID(UID);
         try {
-            animalAfter = animals.findAnimalByUID(UID);
+            animalAfter = animals.getAnimalByUID(UID);
         }catch (Exception e){
 
         }

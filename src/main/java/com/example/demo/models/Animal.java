@@ -4,6 +4,7 @@ public class Animal {
     private String name;
     private String species;
     private int UID;
+    private String URL="https://www.freeiconspng.com/uploads/no-image-icon-4.png";
 
     public int getUID() {
         return UID;
@@ -30,6 +31,16 @@ public class Animal {
         this.name = name;
         this.species = species;
         this.UID = UID;
+    }
+    public Animal(String name, String species, int UID, String URL) {
+        this.name = name;
+        this.species = species;
+        this.UID = UID;
+        this.URL = URL;
+    }
+
+    public String getURL() {
+        return URL;
     }
 
     @Override
