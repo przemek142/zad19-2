@@ -50,5 +50,6 @@ public class Animal {
                 ", species='" + species + '\'' +
                 ", UID=" + UID +
                 '}';
+        
     }
 }
