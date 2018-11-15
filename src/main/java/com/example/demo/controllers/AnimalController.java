@@ -43,7 +43,7 @@ public class AnimalController {
         model.addAttribute("cat", animalRepository.getCategories());
         model.addAttribute("newAnimal", new Animal());
 
-        return "redirect:wszystkieZwierzaki";
+        return "addAnimal";
     }
 
     @GetMapping("/killKillKill")
