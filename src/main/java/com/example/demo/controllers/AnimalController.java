@@ -27,11 +27,11 @@ public class AnimalController {
     }
 
     @GetMapping("/wszystkieZwierzaki")
-    public String allAnimalsController(Model model, @RequestParam(value = "cat", required = false, defaultValue = "null") String cat) {
-        if ("wszystkie".compareTo(cat) == 0 || "null".compareTo(cat) == 0)
+    public String allAnimalsController(Model model, @RequestParam(value = "cat", required = false) String cat) {
+        if ("wszystkie".equals(cat) || cat == null)
             model.addAttribute("animals", animalRepository.getAnimals());
         else
-            model.addAttribute("animals",animalRepository.getAnimalsByCategory(cat));
+            model.addAttribute("animals", animalRepository.getAnimalsByCategory(cat));
 
         model.addAttribute("cat", animalRepository.getCategories());
         return "allAnimals";
@@ -43,7 +43,22 @@ public class AnimalController {
         model.addAttribute("cat", animalRepository.getCategories());
         model.addAttribute("newAnimal", new Animal());
 
-        return "addAnimal";
+        return "redirect:wszystkieZwierzaki";
+    }
+
+    @GetMapping("/killKillKill")
+    public String killBeastie(Model model, @RequestParam Integer UID) {
+        model.addAttribute("animals", animalRepository.getAnimals());
+        model.addAttribute("cat", animalRepository.getCategories());
+        animalRepository.removeAnimalByUID(UID);
+        return "redirect:wszystkieZwierzaki";
+    }
+
+    @GetMapping("/killLovelyCreature")
+    public String killSingleBeast(Model model) {
+        model.addAttribute("animals", animalRepository.getAnimals());
+        model.addAttribute("cat", animalRepository.getCategories());
+        return "killTheBeast";
     }
 
     @GetMapping("/singleAnimal")
@@ -53,7 +68,7 @@ public class AnimalController {
     }
 
     @PostMapping("/saveAnimal")
-    public String saveAnimal(Animal animal){
+    public String saveAnimal(Animal animal) {
         animalRepository.addAnimal(animal);
         return "redirect:wszystkieZwierzaki";
     }

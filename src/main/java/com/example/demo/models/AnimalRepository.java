@@ -4,9 +4,7 @@ import com.example.demo.exceptions.AnimalNotFoundException;
 import com.example.demo.exceptions.AnimalNotRemovedException;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class AnimalRepository {
@@ -29,29 +27,27 @@ public class AnimalRepository {
     public void addAnimal(String name, String species, String description) {
         animals.add(new Animal(name, species, findUnsusedUID(), description));
     }
+
     public void addAnimal(String name, String species, String URL, String description) {
         animals.add(new Animal(name, species, findUnsusedUID(), URL, description));
     }
+
     public void addAnimal(Animal animal) {
         animals.add(animal);
     }
 
     public AnimalRepository() {
-        addAnimal("kotek", "kot", "https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg","opis");
+        addAnimal("kotek", "kot", "https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg", "opis");
         addAnimal("myszka", "mysz", "https://bios.net.pl/files/media/5goxs5kvwn/mysz-d.jpg", "opis");
-        addAnimal("piesek", "pies", "https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg","opis");
+        addAnimal("piesek", "pies", "https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg", "opis");
     }
 
     public Animal getAnimalByUID(int UID) {
-        Animal returnAnimal = null;
         for (Animal animal : getAnimals()) {
             if (animal.getUID() == UID)
-                returnAnimal = animal;
+                return animal;
         }
-        if (returnAnimal == null)
-            throw new AnimalNotFoundException(UID);
-
-        return returnAnimal;
+        throw new AnimalNotFoundException(UID);
     }
 
 
@@ -63,22 +59,21 @@ public class AnimalRepository {
         }
     }
 
-    public ArrayList<String> getCategories(){
-        ArrayList<String> categoriesTemp = new ArrayList<>();
-        ArrayList<String> categories = new ArrayList<>();
+    public ArrayList<String> getCategories() {
+        ArrayList<String> list = new ArrayList<>(); // żeby "wszysktie" było pierwsze na liście
+        Set<String> setTemp = new TreeSet<>(); //do sortowania nazw
+
         for (Animal animal : getAnimals()) {
-            if (!categoriesTemp.contains(animal.getSpecies()))
-                categoriesTemp.add(animal.getSpecies());
+           setTemp.add(animal.getSpecies());
         }
-        Collections.sort(categoriesTemp);
-        categories.add("wszystkie");
-        for (String s : categoriesTemp) {
-            categories.add(s);
+        list.add("wszystkie");
+        for (String s : setTemp) {
+            list.add(s);
         }
-        return categories;
+        return list;
     }
 
-    public ArrayList<Animal> getAnimalsByCategory(String categoryName){
+    public ArrayList<Animal> getAnimalsByCategory(String categoryName) {
         ArrayList<Animal> listOfAnimals = new ArrayList<>();
         for (Animal animal : getAnimals()) {
             if (animal.getSpecies().compareTo(categoryName) == 0)
