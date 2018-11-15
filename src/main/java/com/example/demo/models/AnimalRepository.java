@@ -26,20 +26,20 @@ public class AnimalRepository {
         return lastUID + 1;
     }
 
-    public void addAnimal(String name, String species) {
-        animals.add(new Animal(name, species, findUnsusedUID()));
+    public void addAnimal(String name, String species, String description) {
+        animals.add(new Animal(name, species, findUnsusedUID(), description));
     }
-    public void addAnimal(String name, String species, String URL) {
-        animals.add(new Animal(name, species, findUnsusedUID(), URL));
+    public void addAnimal(String name, String species, String URL, String description) {
+        animals.add(new Animal(name, species, findUnsusedUID(), URL, description));
     }
     public void addAnimal(Animal animal) {
         animals.add(animal);
     }
 
     public AnimalRepository() {
-        addAnimal("kotek", "kot", "https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg");
-        addAnimal("myszka", "mysz", "https://bios.net.pl/files/media/5goxs5kvwn/mysz-d.jpg");
-        addAnimal("piesek", "pies", "https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg");
+        addAnimal("kotek", "kot", "https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg","opis");
+        addAnimal("myszka", "mysz", "https://bios.net.pl/files/media/5goxs5kvwn/mysz-d.jpg", "opis");
+        addAnimal("piesek", "pies", "https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg","opis");
     }
 
     public Animal getAnimalByUID(int UID) {

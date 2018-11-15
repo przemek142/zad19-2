@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Animal;
 import com.example.demo.models.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class AnimalController {
     @GetMapping("/dodaj")
     public String addAnimalController(Model model) {
         model.addAttribute("animals", animalRepository.getAnimals());
+        model.addAttribute("cat", animalRepository.getCategories());
+        model.addAttribute("newAnimal", new Animal());
+
         return "addAnimal";
     }
 
@@ -46,5 +50,11 @@ public class AnimalController {
     public String showSinleAnimalController(Model model, @RequestParam Integer UID) {
         model.addAttribute("animal", animalRepository.getAnimalByUID(UID));
         return "singleAnimal";
+    }
+
+    @PostMapping("/saveAnimal")
+    public String saveAnimal(Animal animal){
+        animalRepository.addAnimal(animal);
+        return "redirect:wszystkieZwierzaki";
     }
 }

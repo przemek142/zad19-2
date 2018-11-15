@@ -9,10 +9,17 @@
 <div th:replace="fragments :: navbar">navbar</div>
 <div th:replace="fragments :: title(subtitle='Strona zwierzaka')">title</div>
 
-<p th:text="|name: ${animal.getName()} |"></p>
+
+<div class="text-center">
+
+    <img th:src="${animal.getURL()}" class="img-fluid">
+    <p th:utext="${'Imię: ' + animal.getName() + '<br>gatunek: ' + animal.getSpecies()}"></p>
+    <p th:text="|${animal.getDescription()} |"></p>
 
 
+    <div th:replace="fragments :: footer">footer</div>
 
-<div th:replace="fragments :: footer">footer</div>
+
+</div>
 </body>
 </html>

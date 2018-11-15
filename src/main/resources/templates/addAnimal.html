@@ -9,8 +9,41 @@
 <div th:replace="fragments :: navbar">navbar</div>
 <div th:replace="fragments :: title(subtitle='Dodaj zwierzaka')">title</div>
 
+<div class="container">
+    <form th:action="@{/saveAnimal}" method="post" th:object="${newAnimal}">
+        <div class="form-group">
+            <label for="name">Imię zwierzaka</label>
+            <input type="text" class="form-control" id="name" placeholder="Imię" th:field="*{name}">
+        </div>
+        <div class="row">
 
+            <div class="col-auto my-1">
+                <div class="form-group">
+                    <label for="gat2">Gatunek (opisowo)</label>
+                    <input type="text" class="form-control" id="gat2" placeholder="Gatunek" th:field="*{species}">
+                </div>
+            </div>
 
+            <div class="col-auto my-1">
+                <label for="gat1">gatunki w bazie - podgląd</label>
+                <select class="custom-select mr-sm-2" id="gat1" name="cat">
+                    <option th:each="option : ${cat}" th:text="${option}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="url">URL zdjęcia</label>
+            <input type="text" class="form-control" id="url" placeholder="http://" th:field="*{URL}">
+        </div>
+        <div class="form-group">
+            <label for="desc">Opis</label>
+            <textarea class="form-control" id="desc" rows="4" th:field="*{description}"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+        </div>
+    </form>
+</div>
 
 
 <div th:replace="fragments :: footer">footer</div>

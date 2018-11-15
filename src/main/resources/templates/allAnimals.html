@@ -12,7 +12,7 @@
 
 <form th:action="@{/wszystkieZwierzaki}" method="get">
     <div class="row">
-          <div class="col-auto my-1">
+        <div class="col-auto my-1">
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="cat">
                 <option th:each="option : ${cat}" th:text="${option}"></option>
             </select>
@@ -24,10 +24,7 @@
 </form>
 <br>
 
-
-
-
-        <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
 
         <div class="col-3" th:each="animal : ${animals}">
@@ -35,7 +32,7 @@
                 <img th:src="${animal.getURL()}" class="img-fluid">
             </a>
             <div class="text-center">
-                <h3 th:text="${animal.getName()}">zwierzak</h3>
+                <h3 th:utext="${animal.getName() + ' (' + animal.getSpecies() + ')'}">zwierzak</h3>
             </div>
         </div>
 
